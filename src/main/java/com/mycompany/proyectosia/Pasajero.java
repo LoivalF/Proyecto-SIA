@@ -5,7 +5,7 @@
 package com.mycompany.proyectosia ;
 /**
  *
- * @author gueon
+ * @author LoivalF
  */
 public class Pasajero { //hola
     private String nombre;
@@ -33,4 +33,11 @@ public class Pasajero { //hola
     public String getNombre() { return this.nombre; }
     public String getRut() { return this.rut; }
     public String getDestino() { return destino; } 
+    
+    //MÉTODOS
+    public void mostrarInfoPasajero(Pasajero p) {
+        System.out.println("Nombre: "+p.getNombre());
+        System.out.println("RUT: "+p.getRut());
+        System.out.println("Destino: "+p.getDestino());
+    }
 }
