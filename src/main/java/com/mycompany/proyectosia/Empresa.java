@@ -27,18 +27,19 @@ public class Empresa {
     
     public void agregarBus(Bus b, String destino) {
         b.setDestino(destino);
-    
         if (!buses.contains(b)) {
             buses.add(b);
             System.out.println("Bus agregado: patente " + b.getPatente() + " con destino " + destino);
         }
-    
-        mapaBuses.putIfAbsent(destino, new ArrayList<>());
-        ArrayList<Bus> lista = mapaBuses.get(destino);
+        if (!mapaBuses.containsKey(destino)) {
+            mapaBuses.put(destino, new ArrayList()); 
+        }
+        ArrayList lista = mapaBuses.get(destino);  //se me olvido quitar los diamantes XD
         if (!lista.contains(b)) { 
             lista.add(b);
         }
     }
+
     
     public boolean asignarPasajeroABus(Pasajero p, String patente) {
         for (int i = 0; i < buses.size(); i++) {
