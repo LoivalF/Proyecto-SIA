@@ -69,7 +69,7 @@ public class Bus {
         for (int i = 0 ; i < listaPasajeros.size() ; i++) {
             Pasajero p = (Pasajero) listaPasajeros.get(i);
             
-            if (p.getRut() == rut) {
+            if (p.getRut().equalsIgnoreCase(rut)) {
                 listaPasajeros.remove(i);
                 System.out.println("Pasajero de RUT "+rut+" ha sido eliminado correctamente");
                 return;
