@@ -37,25 +37,26 @@ public class Empresa {
         mapaBuses.get(destino).add(b) ;
     }
     
-    public boolean asignarPasajeroABus (Pasajero p, String patente) {
-        for (Bus b : buses) { //buscar bus por patente
-            if (b.getPatente().equals(patente)) {
-                if (!p.getDestino().equals(b.getDestino())) { //verifica que el destinto del pasajero y el bus concuerde
-                    System.out.println("el destino del pasajeno no coincide con el bus") ;
-                    return false ;
+    public boolean asignarPasajeroABus(Pasajero p, String patente) {
+        for (int i = 0; i < buses.size(); i++) {
+            Bus b = buses.get(i);
+            if (b.getPatente().equalsIgnoreCase(patente)) {
+                if (!p.getDestino().equalsIgnoreCase(b.getDestino())) {
+                    System.out.println("El destino del pasajero no coincide con el del bus.");
+                    return false;
                 }
-                if (b.getCapacidad() > 0) { //verifica la capacidad del bus ;;;ppp
-                    b.setCapacidad(b.getCapacidad() - 1); //reduce el cupo del bus
-                    System.out.println("pasajero : sunombre, asignado al bus : patente");
-                    return true ;
+                // delega en el bus (él valida capacidad y descuenta)
+                if (b.agregarPasajero(p)) {
+                    System.out.println("Pasajero " + p.getNombre() + " asignado al bus " + b.getPatente());
+                    return true;
                 } else {
-                    System.out.println("El bus patente esta lleno");
-                    return false ;
+                    System.out.println("El bus " + b.getPatente() + " está lleno.");
+                    return false;
                 }
             }
         }
-        System.out.println("No existe un bus con la patente, patente");
-        return false ;
+        System.out.println("No existe un bus con la patente: " + patente);
+        return false;
     }
     public void mostrarPasajerosDeBus(String patente) {
         for (int i = 0; i < buses.size(); i++) {
