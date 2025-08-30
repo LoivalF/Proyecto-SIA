@@ -25,16 +25,19 @@ public class Empresa {
     //Setter
     public void setNombre(String nombre){this.nombre = nombre ;}
     
-    public void agregarBus (Bus b, String destino) { //metodo que agrega un bus con destino
-        b.setDestino(destino) ; //destino del bus
-        if (!buses.contains(b)){ //agregar a lista de buses
+    public void agregarBus(Bus b, String destino) {
+        b.setDestino(destino);
+    
+        if (!buses.contains(b)) {
             buses.add(b);
-            System.out.println("Hay un bus tanto, con patente tanto con destino tanto");
+            System.out.println("Bus agregado: patente " + b.getPatente() + " con destino " + destino);
         }
-        if (!mapaBuses.containsKey(destino)) { //Agrega al mapa por destino....
-            mapaBuses.put(destino, new ArrayList<>()) ; // cada destino tiene su lista de buses
+    
+        mapaBuses.putIfAbsent(destino, new ArrayList<>());
+        ArrayList<Bus> lista = mapaBuses.get(destino);
+        if (!lista.contains(b)) { 
+            lista.add(b);
         }
-        mapaBuses.get(destino).add(b) ;
     }
     
     public boolean asignarPasajeroABus(Pasajero p, String patente) {
