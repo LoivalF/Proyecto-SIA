@@ -8,7 +8,7 @@ import java.util.* ;
  *
  * @author pauli
  */
-public class Empresa {
+public class Empresa { //hola
     private String nombre ;
     private ArrayList<Bus> buses ;
     private Map<String, ArrayList<Bus>> mapaBuses ;
