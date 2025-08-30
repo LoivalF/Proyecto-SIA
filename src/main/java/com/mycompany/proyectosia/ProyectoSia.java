@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.proyectosia;
+import java.io.*;
 
 /**
  *
@@ -10,7 +11,7 @@ package com.mycompany.proyectosia;
  */
 public class ProyectoSia {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Hello World!");
         System.out.println("Hola Mundo");
         System.out.println("Intento de guardado 2");
