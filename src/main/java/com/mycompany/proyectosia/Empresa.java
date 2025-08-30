@@ -6,7 +6,7 @@ package com.mycompany.proyectosia ;
 import java.util.* ;
 /**
  *
- * @author pauli
+ * @author pauli felip
  */
 public class Empresa { //hola
     private String nombre ;
@@ -57,5 +57,35 @@ public class Empresa { //hola
         }
         System.out.println("No existe un bus con la patente, patente");
         return false ;
+    }
+    public void mostrarPasajerosDeBus(String patente) {
+        for (int i = 0; i < buses.size(); i++) {
+            Bus b = (Bus) buses.get(i); // casteo a Bus
+            if (b.getPatente().equalsIgnoreCase(patente)) {
+                System.out.println("Pasajeros del bus con patente " + patente + ":");
+    
+                ArrayList pasajeros = b.getListaPasajeros(); // sin <>
+                for (int j = 0; j < pasajeros.size(); j++) {
+                    Pasajero p = (Pasajero) pasajeros.get(j); // casteo a Pasajero
+                    System.out.println("| " + p.getNombre() + " | RUT: " + p.getRut() + " | Destino: " + p.getDestino());
+                }
+                return;
+            }
+        }
+        System.out.println("No se encontró ningún bus con la patente: " + patente);
+    }
+
+    public void obtenerBusesDestino(String destino) {
+        if (mapaBuses.containsKey(destino)) {  // containsKey es de Map
+            ArrayList lista = mapaBuses.get(destino); // 
+            System.out.println("Buses con destino a " + destino + ":");
+
+            for (int i = 0; i < lista.size(); i++) {
+                Bus b = (Bus) lista.get(i); // casteo a Bus
+                System.out.println("| Patente: " + b.getPatente() + " | Capacidad: " + b.getCapacidad());
+            }
+        } else {
+            System.out.println("No hay buses registrados para el destino: " + destino);
+        }
     }
 }
