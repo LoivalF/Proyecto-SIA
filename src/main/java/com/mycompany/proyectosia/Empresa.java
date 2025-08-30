@@ -10,7 +10,7 @@ import java.util.* ;
  */
 public class Empresa { 
     private String nombre ;
-    private ArrayList<Bus> buses ;
+    private ArrayList buses ;
     private Map<String, ArrayList<Bus>> mapaBuses ;
     
     public Empresa(String nombre) {
@@ -20,8 +20,8 @@ public class Empresa {
     }
     //Getter
     public String getNombre() {return nombre ;}
-    public ArrayList<Bus> getBuses() {return buses ;}
-    public Map<String, ArrayList<Bus>> getMapaBuses() {return mapaBuses ;}
+    public ArrayList getBuses() {return buses ;}
+    public Map<String, ArrayList> getMapaBuses() {return mapaBuses ;}
     //Setter
     public void setNombre(String nombre){this.nombre = nombre ;}
     
@@ -50,7 +50,7 @@ public class Empresa {
                     return false;
                 }
                 // delega en el bus (él valida capacidad y descuenta)
-                if (b.agregarPasajero(p)) {
+                if (b.agregarPasajero(p)) { // es void
                     System.out.println("Pasajero " + p.getNombre() + " asignado al bus " + b.getPatente());
                     return true;
                 } else {
