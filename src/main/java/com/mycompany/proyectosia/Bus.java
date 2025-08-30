@@ -43,26 +43,24 @@ public class Bus {
     public ArrayList getListaPasajeros() { return listaPasajeros; }
     
     //MÉTODOS
-    public void agregarPasajero(Pasajero p) {
+    public boolean agregarPasajero(Pasajero p) {
         if (this.capacidad == 0) { 
-            System.out.println("No quedan asientos disponibles en el bus. ¡Lo sentimos!");
-            return; 
+            return false; 
         }
               
         listaPasajeros.add(p);
         capacidad--;
-        System.out.println("¡Pasajero añadido correctamente!");
+        return true;
     }
-    public void agregarPasajero(String nombre, String rut, String destino) {
+    public boolean agregarPasajero(String nombre, String rut, String destino) {
         if (this.capacidad == 0) { 
-            System.out.println("No quedan asientos disponibles en el bus. ¡Lo sentimos!");
-            return; 
+            return false; 
         }
         
         Pasajero p = new Pasajero(nombre, rut, destino);
         listaPasajeros.add(p);
         capacidad--;
-        System.out.println("¡Pasajero añadido correctamente!");
+        return true;
     }
     
     public void eliminarPasajero(String rut) {
