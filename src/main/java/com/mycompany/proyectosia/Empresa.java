@@ -8,7 +8,7 @@ import java.util.* ;
  *
  * @author pauli felip
  */
-public class Empresa { //hola
+public class Empresa { 
     private String nombre ;
     private ArrayList<Bus> buses ;
     private Map<String, ArrayList<Bus>> mapaBuses ;
@@ -24,7 +24,6 @@ public class Empresa { //hola
     public Map<String, ArrayList<Bus>> getMapaBuses() {return mapaBuses ;}
     //Setter
     public void setNombre(String nombre){this.nombre = nombre ;}
-    //crear mas metodos jiji
     
     public void agregarBus (Bus b, String destino) { //metodo que agrega un bus con destino
         b.setDestino(destino) ; //destino del bus
