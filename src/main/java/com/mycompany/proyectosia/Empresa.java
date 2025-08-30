@@ -11,25 +11,28 @@ import java.util.* ;
 public class Empresa { 
     private String nombre ;
     private ArrayList buses ;
-    private Map<String, ArrayList<Bus>> mapaBuses ;
+    private Map<String, ArrayList> mapaBuses ;
     
     public Empresa(String nombre) {
         this.nombre = nombre ;
-        this.buses = new ArrayList<>() ;
-        this.mapaBuses = new HashMap<>() ;
+        this.buses = new ArrayList() ;
+        this.mapaBuses = new HashMap() ;
     }
-    //Getter
-    public String getNombre() {return nombre ;}
-    public ArrayList getBuses() {return buses ;}
-    public Map<String, ArrayList> getMapaBuses() {return mapaBuses ;}
-    //Setter
+    //GETTERS
+    public String getNombre() { return nombre ;}
+    public ArrayList getBuses() { return buses ;}
+    public Map<String, ArrayList> getMapaBuses() { return mapaBuses ;}
+    
+    //SETTERS
     public void setNombre(String nombre){this.nombre = nombre ;}
+    public void setListaBuses(ArrayList buses) { this.buses = buses; }
+    private void setMapaBuses(Map<String, ArrayList> mapaBuses) { this.mapaBuses = mapaBuses; }
     
     public void agregarBus(Bus b, String destino) {
         b.setDestino(destino);
         if (!buses.contains(b)) {
             buses.add(b);
-            System.out.println("Bus agregado: patente " + b.getPatente() + " con destino " + destino);
+            System.out.println("Bus agregado: Patente " + b.getPatente() + " con destino " + destino);
         }
         if (!mapaBuses.containsKey(destino)) {
             mapaBuses.put(destino, new ArrayList()); 
@@ -40,10 +43,10 @@ public class Empresa {
         }
     }
 
-    
+    //MÉTODOS
     public boolean asignarPasajeroABus(Pasajero p, String patente) {
         for (int i = 0; i < buses.size(); i++) {
-            Bus b = buses.get(i);
+            Bus b = (Bus) buses.get(i);
             if (b.getPatente().equalsIgnoreCase(patente)) {
                 if (!p.getDestino().equalsIgnoreCase(b.getDestino())) {
                     System.out.println("El destino del pasajero no coincide con el del bus.");
