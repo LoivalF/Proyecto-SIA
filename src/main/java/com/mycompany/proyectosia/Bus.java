@@ -70,6 +70,7 @@ public class Bus {
             if (p.getRut().equalsIgnoreCase(rut)) {
                 listaPasajeros.remove(i);
                 System.out.println("Pasajero de RUT "+rut+" ha sido eliminado correctamente");
+                this.capacidad++;
                 return;
             }
         }
