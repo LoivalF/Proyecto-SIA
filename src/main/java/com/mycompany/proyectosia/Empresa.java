@@ -50,7 +50,7 @@ public class Empresa {
                     return false;
                 }
                 // delega en el bus (él valida capacidad y descuenta)
-                if (b.agregarPasajero(p)) { // es void
+                if (b.agregarPasajero(p)) { 
                     System.out.println("Pasajero " + p.getNombre() + " asignado al bus " + b.getPatente());
                     return true;
                 } else {
