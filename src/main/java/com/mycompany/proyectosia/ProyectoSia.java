@@ -115,7 +115,7 @@ public class ProyectoSia {
             }
         }
 
-        // (Opcional) Validar destino aquí para avisar antes:
+        // Validar destino aquí para avisar antes:
         if (!destino.equalsIgnoreCase(busEncontrado.getDestino())) {
             System.out.println("El destino del pasajero no coincide con el del bus (" 
                                + busEncontrado.getDestino() + ").");
