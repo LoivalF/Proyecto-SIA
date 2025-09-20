@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyectosia ;
 import java.util.*;
-import java.io.*;
+
 
 /**
  *
@@ -34,13 +30,15 @@ public class Bus {
     public void setPatente(String patente) { this.patente = patente; }
     public void setCapacidad(int capacidad) { this.capacidad = capacidad; }
     public void setDestino(String destino) { this.destino = destino; }
-    public void setListaPasajeros(ArrayList listaPasajeros) { this.listaPasajeros = listaPasajeros; }
+    public void setListaPasajeros(ArrayList lista) { 
+        if (lista == null) { this.listaPasajeros = new ArrayList(); }
+        else { this.listaPasajeros = new ArrayList(lista); }}
 
     //GETTERS
     public String getPatente() { return patente; }
     public int getCapacidad() { return capacidad; }
     public String getDestino() { return destino; }
-    public ArrayList getListaPasajeros() { return listaPasajeros; }
+    public ArrayList getListaPasajeros() { return new ArrayList(listaPasajeros); }
     
     //MÉTODOS
     public boolean agregarPasajero(Pasajero p) {

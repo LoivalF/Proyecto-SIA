@@ -1,32 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyectosia ;
 import java.util.* ;
 /**
  *
- * @author pauli felip
+ * @author pauli felip LoivalF
  */
 public class Empresa { 
     private String nombre ;
     private ArrayList buses ;
-    private Map<String, ArrayList> mapaBuses ;
+    private Map mapaBuses ;
     
     public Empresa(String nombre) {
         this.nombre = nombre ;
         this.buses = new ArrayList() ;
         this.mapaBuses = new HashMap() ;
     }
-    //GETTERS
-    public String getNombre() { return nombre ;}
-    public ArrayList getBuses() { return buses ;}
-    public Map<String, ArrayList> getMapaBuses() { return mapaBuses ;}
     
     //SETTERS
     public void setNombre(String nombre){this.nombre = nombre ;}
-    public void setListaBuses(ArrayList buses) { this.buses = buses; }
-    private void setMapaBuses(Map<String, ArrayList> mapaBuses) { this.mapaBuses = mapaBuses; }
+    public void setBus(Bus b) { if (!buses.contains(b)) { buses.add(b);}}
+    public void setMapaBuses(Map mapaBuses) {
+        if (mapaBuses == null) { this.mapaBuses = new HashMap(); }
+        else { this.mapaBuses = new HashMap(mapaBuses); }}
+    
+    //GETTERS
+    public String getNombre() { return nombre ;}
+    public ArrayList getBuses() { return new ArrayList(buses) ;}
+    public Map getMapaBuses() { return new HashMap(mapaBuses) ;}
     
     public void agregarBus(Bus b, String destino) {
         b.setDestino(destino);
@@ -37,7 +36,7 @@ public class Empresa {
         if (!mapaBuses.containsKey(destino)) {
             mapaBuses.put(destino, new ArrayList()); 
         }
-        ArrayList lista = mapaBuses.get(destino);  //se me olvido quitar los diamantes XD
+        ArrayList lista = (ArrayList) mapaBuses.get(destino); 
         if (!lista.contains(b)) { 
             lista.add(b);
         }
@@ -84,7 +83,7 @@ public class Empresa {
 
     public void obtenerBusesDestino(String destino) {
         if (mapaBuses.containsKey(destino)) {  // containsKey es de Map
-            ArrayList lista = mapaBuses.get(destino); // 
+            ArrayList lista = (ArrayList) mapaBuses.get(destino); // 
             System.out.println("Buses con destino a " + destino + ":");
 
             for (int i = 0; i < lista.size(); i++) {

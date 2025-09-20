@@ -1,16 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.proyectosia;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.io.*;
+
+import java.util.*;
 /**
  *
- * @author gueon felip pauli
+ * @author LoivalF felip pauli
  */
 public class ProyectoSia {
 
