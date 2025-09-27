@@ -8,11 +8,13 @@ public class Empresa {
     private String nombre ;
     private ArrayList buses ;
     private Map mapaBuses ;
+    private int presupuesto;
     
     public Empresa(String nombre) {
         this.nombre = nombre ;
         this.buses = new ArrayList() ;
         this.mapaBuses = new HashMap() ;
+        this.presupuesto = 50000000;
     }
     
     //SETTERS
@@ -21,11 +23,15 @@ public class Empresa {
     public void setMapaBuses(Map mapaBuses) {
         if (mapaBuses == null) { this.mapaBuses = new HashMap(); }
         else { this.mapaBuses = new HashMap(mapaBuses); }}
+    public void setPresupuesto(int presupuesto) { this.presupuesto = presupuesto; }
+    
     
     //GETTERS
     public String getNombre() { return nombre ;}
     public ArrayList getBuses() { return new ArrayList(buses) ;}
     public Map getMapaBuses() { return new HashMap(mapaBuses) ;}
+    public int getPresupuesto() { return presupuesto; }
+    
     
     //MÉTODOS
     public void agregarBus(Bus b, String destino) {
