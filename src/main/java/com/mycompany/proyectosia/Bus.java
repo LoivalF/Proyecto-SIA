@@ -11,6 +11,9 @@ public class Bus {
     private int capacidad;
     private String destino;
     private ArrayList listaPasajeros;
+    private int costoMantencion;
+    private int precio;
+    private int montoGenerado;
     
     //CONSTRUCTORES
     public Bus(String patente, int capacidad, String destino, ArrayList listaPasajeros) {
@@ -33,12 +36,18 @@ public class Bus {
     public void setListaPasajeros(ArrayList lista) { 
         if (lista == null) { this.listaPasajeros = new ArrayList(); }
         else { this.listaPasajeros = new ArrayList(lista); }}
+    public void setCostoMantencion(int costoMantencion) { this.costoMantencion = costoMantencion; }
+    public void setPrecio(int precio) { this.precio = precio; }
+    public void setMontoGenerado(int montoGenerado) { this.montoGenerado = montoGenerado; }
 
     //GETTERS
     public String getPatente() { return patente; }
     public int getCapacidad() { return capacidad; }
     public String getDestino() { return destino; }
     public ArrayList getListaPasajeros() { return new ArrayList(listaPasajeros); }
+    public int getCostoMantencion() { return costoMantencion; }
+    public int getPrecio() { return precio; }
+    public int getMontoGenerado() { return montoGenerado; }
     
     //MÉTODOS
     public boolean agregarPasajero(Pasajero p) {
@@ -78,4 +87,6 @@ public class Bus {
     public int pasajerosActuales() {
         return listaPasajeros.size();
     }
+
+    
 }
