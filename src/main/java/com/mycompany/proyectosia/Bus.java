@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Bus {
     private String patente;
-    private int capacidad;              // NOTA: en tu lógica actual, esta capacidad se va DECREMENTANDO al vender y se INCREMENTA al eliminar (es decir, son cupos restantes).
+    private int capacidad;              
     private String destino;
     private ArrayList listaPasajeros;   // Se mantiene sin genéricos para no romper tu código existente
     private int costoMantencion;        // Usaremos esto como costo por viaje (costo fijo del servicio)
