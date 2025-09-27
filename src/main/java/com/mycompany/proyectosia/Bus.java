@@ -65,17 +65,23 @@ public class Bus {
 }
 
     // ===== MÉTODOS EXISTENTES (NO MODIFICADOS) =====
-    public boolean agregarPasajero(Pasajero p) {
+    public boolean agregarPasajero(Pasajero p) throws CapacidadLlenaException, PasajeroDuplicadoException {
         if (this.capacidad == 0) {
-            return false;
+        throw new CapacidadLlenaException("Bus " + getPatente() + " sin cupos.");
+        }
+        if (p != null && contieneRut(p.getRut())) {
+            throw new PasajeroDuplicadoException("RUT " + p.getRut() + " ya existe en bus " + getPatente());
         }
         listaPasajeros.add(p);
         capacidad--;
         return true;
     }
-    public boolean agregarPasajero(String nombre, String rut, String destino) {
+    public boolean agregarPasajero(String nombre, String rut, String destino) throws CapacidadLlenaException, PasajeroDuplicadoException {
         if (this.capacidad == 0) {
-            return false;
+        throw new CapacidadLlenaException("Bus " + getPatente() + " sin cupos.");
+        }
+        if (rut != null && contieneRut(rut)) {
+            throw new PasajeroDuplicadoException("RUT " + rut + " ya existe en bus " + getPatente());
         }
         Pasajero p = new Pasajero(nombre, rut, destino);
         listaPasajeros.add(p);
@@ -206,15 +212,18 @@ public class Bus {
         int maxMov = Math.min(cantidad, cupos);
         List movidos = origen.extraerPasajerosHasta(maxMov);
         int realizados = 0;
+
         for (int i = 0; i < movidos.size(); i++) {
             Pasajero p = (Pasajero) movidos.get(i);
-            // Reutilizamos tu agregarPasajero(Pasajero) para mantener coherencia en capacidad--
-            boolean ok = this.agregarPasajero(p);
-            if (ok) {
+            try {
+                // Usa tu método existente que ahora lanza excepciones
+                this.agregarPasajero(p);
                 realizados++;
-            } else {
-                // si por alguna razón no cupo, devolvemos el pasajero al origen para no perderlo
-                origen.agregarPasajero(p);
+            } catch (CapacidadLlenaException | PasajeroDuplicadoException ex) {
+                // Si no se pudo agregar aquí, lo devolvemos al origen manualmente:
+                origen.listaPasajeros.add(p);
+                origen.capacidad--; // compensar el ++ hecho al extraer
+                // (opcional) System.out.println("No se pudo mover " + p.getRut() + ": " + ex.getMessage());
             }
         }
         return realizados;
