@@ -31,9 +31,7 @@ public class Pasajero {
     public String getDestino() { return destino; } 
     
     //MÉTODOS
-    public void mostrarInfoPasajero(Pasajero p) {
-        System.out.println("Nombre: "+p.getNombre());
-        System.out.println("RUT: "+p.getRut());
-        System.out.println("Destino: "+p.getDestino());
+    public String toString() {
+        return "Pasajero: " + nombre + ", RUT: " + rut + ", Destino: " + destino;
     }
 }
