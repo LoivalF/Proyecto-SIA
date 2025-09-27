@@ -98,23 +98,29 @@ public class Empresa {
         }
         return null;
     }
-    public Bus asignarPasajeroDisponible(Pasajero p) {
+    public Bus asignarPasajeroDisponible(Pasajero p) throws CapacidadLlenaException, PasajeroDuplicadoException{
         if (!mapaBuses.containsKey(p.getDestino())) {
-            System.out.println("No hay buses con destino a " + p.getDestino());
-            return null;
+            throw new CapacidadLlenaException("No hay buses con destino a " + p.getDestino());
         }
 
         ArrayList lista = (ArrayList) mapaBuses.get(p.getDestino());
 
+        // Probar buses del destino hasta lograr cupo
+        CapacidadLlenaException ultimoCapacidad = null;
         for (int i = 0; i < lista.size(); i++) {
             Bus b = (Bus) lista.get(i);
-            if (b.agregarPasajero(p)) { 
-                System.out.println("Pasajero " + p.getNombre() + " asignado al bus " + b.getPatente() + " con destino a " + b.getDestino() ) ;
-                return b; 
+            try {
+                if (b.agregarPasajero(p)) {
+                    // éxito (si hay duplicado/cupo insuficiente, ya se lanzó arriba)
+                    return b;
+                }
+            } catch (CapacidadLlenaException e) {
+                ultimoCapacidad = e; // intentamos siguiente bus
             }
         }
-        System.out.println("No hay buses con capacidad para el destino " + p.getDestino());
-        return null;
+        // Ningún bus tuvo cupo
+        if (ultimoCapacidad != null) throw ultimoCapacidad;
+        throw new CapacidadLlenaException("No hay cupos disponibles para " + p.getDestino());
     }
     public void mostrarPasajerosDeBus(String patente) {
         for (int i = 0; i < buses.size(); i++) {
@@ -298,6 +304,53 @@ public class Empresa {
         this.presupuesto += precioVenta;
         return true;
     }
+        // Promueve un bus a BusPremium sin tocar CSV ni ProyectoSia
+    public boolean promoverABusPremium(String patente, int recargoServicio) {
+        Bus base = buscarBusPatente(patente);
+        if (base == null) return false;
 
-    // ===================== FIN NUEVOS MÉTODOS – Empresa =====================
+        // Crear premium a partir del base
+        BusPremium premium = new BusPremium(base, recargoServicio);
+
+        // Reemplazar referencia en la lista principal
+        for (int i = 0; i < buses.size(); i++) {
+            if (buses.get(i) == base) { buses.set(i, premium); break; }
+        }
+
+        // Reemplazar referencia en el mapa por destino
+        ArrayList lista = (ArrayList) mapaBuses.get(base.getDestino());
+        if (lista != null) {
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i) == base) { lista.set(i, premium); break; }
+            }
+        }
+        return true;
+    }
+
+    // Promueve un pasajero a PasajeroFrecuente (reemplazando uno por otro)
+    public boolean promoverPasajeroAFrecuente(String rut, int puntos) {
+        if (rut == null || rut.trim().isEmpty()) return false;
+        Bus b = buscarBusDePasajeroPorRut(rut);
+        if (b == null) return false;
+
+        Pasajero p = b.buscarPasajeroPorRut(rut);
+        if (p == null) return false;
+
+        // Eliminar original -> capacity++ interno
+        b.eliminarPasajero(rut);
+
+        PasajeroFrecuente pf = new PasajeroFrecuente(p.getNombre(), p.getRut(), p.getDestino(), puntos);
+        try {
+            b.agregarPasajero(pf);
+            return true;
+        } catch (CapacidadLlenaException | PasajeroDuplicadoException ex) {
+
+            try {
+                b.agregarPasajero(p); 
+            } catch (Exception ignore) {
+
+            }
+            return false;
+        }
+    }
 }
