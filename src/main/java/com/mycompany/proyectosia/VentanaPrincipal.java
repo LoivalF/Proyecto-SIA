@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectosia;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 /**
  *
@@ -123,7 +124,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // ESTO ES PARA EL BOTON
+        JFrame frame = new JFrame("Panel de Pasajeros");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // solo cierra este frame
+        frame.getContentPane().add(new PanelPasajeros()); // agregamos tu panel
+        frame.pack(); // ajusta tamaño según el panel
+        frame.setLocationRelativeTo(this); // centra respecto a la ventana principal
+        frame.setVisible(true); // mostramos la ventana
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
