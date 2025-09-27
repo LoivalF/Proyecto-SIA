@@ -93,7 +93,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton3.setText("Buses");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                DialogBus dialog = new DialogBus(this, true, empresa); 
+                dialog.setVisible(true);
             }
         });
 
@@ -239,3 +240,4 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private java.awt.TextField textField2;
     // End of variables declaration//GEN-END:variables
 }
+
