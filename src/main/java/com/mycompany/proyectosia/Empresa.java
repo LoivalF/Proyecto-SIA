@@ -280,30 +280,11 @@ public class Empresa {
                 enMapa.remove(aCancelar);
                 if (enMapa.isEmpty()) this.mapaBuses.remove(destino);
             }
-            consolidarPorDestino(destino, umbralUtilidad);
             return true;
         }
         return false; // quedaron pax sin cupo, no se cancela
     }
 
-    /** Compra de bus con presupuesto. */
-    public boolean comprarBus(Bus nuevo, int costoCompra) {
-        if (nuevo == null || costoCompra < 0) return false;
-        if (this.presupuesto < costoCompra) return false;
-        this.presupuesto -= costoCompra;
-        // usa el overload agregado
-        agregarBus(nuevo);
-        return true;
-    }
-
-    /** Venta de bus: intenta vender tras reasignar; si se logra cancelar, suma al presupuesto. */
-    public boolean venderBus(String patente, int precioVenta) {
-        if (precioVenta < 0) return false;
-        boolean cancelado = cancelarViaje(patente, 0);
-        if (!cancelado) return false;
-        this.presupuesto += precioVenta;
-        return true;
-    }
         // Promueve un bus a BusPremium sin tocar CSV ni ProyectoSia
     public boolean promoverABusPremium(String patente, int recargoServicio) {
         Bus base = buscarBusPatente(patente);
