@@ -22,6 +22,9 @@ public class Bus {
         this.destino = destino;
         this.listaPasajeros = listaPasajeros;
         this.capacidadTotal = capacidad;
+        this.costoMantencion = 120000;
+        this.precio = 5000;
+        this.montoGenerado = this.precio * this.listaPasajeros.size();
     }
     public Bus() {
         this.patente = "Desconocido";
@@ -29,6 +32,9 @@ public class Bus {
         this.destino = "Desconocido";
         this.listaPasajeros = new ArrayList();
         this.capacidadTotal= 0;
+        this.costoMantencion = 120000;
+        this.precio = 5000;
+        this.montoGenerado = 0;
     }
 
     // ===== SETTERS =====
